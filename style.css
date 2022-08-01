@@ -1,13 +1,11 @@
-.row {
-    display: flex;
-    font-size: 9.5px;
-    text-align: center;
-    color: red
+.cell {
+    border: 1px solid gray;
+    min-width: 20px;
+    min-height: 20px;
+    display: inline-block;
+    margin-right: 2px;
 }
 
-.cell {
-    width: 10px;
-    height: 10px;
-    margin: 1px;
-    border: 1px solid black;
+.hover {
+    background-color: black;
 }

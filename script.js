@@ -1,5 +1,42 @@
-let i=0, n=16;
+// Sets important constants and variables
 
-container.innerHTML = 
-    `<div class="row">${'<div class="cell">X</div>'.repeat(n)}</div>`
-    .repeat(n).replace(/X/g,_=> (i++).toString(n) )
+const container = document.getElementById("container");
+let rows = document.getElementsByClassName("gridRow");
+let cells = document.getElementsByClassName("cell");
+
+// Creates a default grid sized 16x16
+function defaultGrid() {
+    makeRows(16);
+    makeColumns(16);
+}
+
+// Takes (rows, columns) input and makes a grid
+function makeRows(rowNum) {
+
+    // Creates rows
+    for (r = 0; r < rowNum; r++) {
+        let row = document.createElement("div");
+        container.appendChild(row).className = "gridRow";
+    };
+};
+
+// Creates columns
+function makeColumns(cellNum) {
+    for (i = 0; i < rows.length; i++) {
+        for (j = 0; j < cellNum; j++) {
+            let newCell = document.createElement("div");
+            rows[j].appendChild(newCell).className = "cell";
+        };
+
+    };
+};
+
+defaultGrid()
+// Setting up a "hover element"
+
+const cell = document.querySelectorAll(".cell")
+cell.forEach((cell) => {
+    cell.addEventListener("mouseover", () => {
+        cell.classList.add("hover")
+    })
+})
