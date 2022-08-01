@@ -38,7 +38,8 @@ defaultGrid()
 cells.forEach((cell) => {
 
     cell.addEventListener("mouseover", () => {
-        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-        cell.style.backgroundColor = "#" + randomColor;
+        let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        document.cell.style.backgroundColor = "#" + randomColor;
+        console.log()
     });
 });
