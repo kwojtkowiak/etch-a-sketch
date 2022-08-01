@@ -2,7 +2,8 @@
 
 const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
-let cells = document.getElementsByClassName("cell");
+let cells = document.querySelectorAll("cell");
+
 
 // Creates a default grid sized 16x16
 function defaultGrid() {
@@ -32,11 +33,12 @@ function makeColumns(cellNum) {
 };
 
 defaultGrid()
-// Setting up a "hover element"
 
-const cell = document.querySelectorAll(".cell")
-cell.forEach((cell) => {
+// Setting up a "hover element"
+cells.forEach((cell) => {
+
     cell.addEventListener("mouseover", () => {
-        cell.classList.add("hover")
-    })
-})
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        cell.style.backgroundColor = "#" + randomColor;
+    });
+});
