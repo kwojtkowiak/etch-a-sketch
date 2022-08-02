@@ -36,6 +36,8 @@ defaultGrid()
 let cells = document.querySelectorAll(".cell");
 let paint = false;
 
+//Set timeout func
+
 addEventListener('mousedown', (event) => {
 	paint = true;
 });
@@ -43,7 +45,7 @@ addEventListener('mouseup', (event) => {
 	paint = false;
 });
 
-// Setting up a "hover element"
+// Setting up a "hover element" for rainbow mode
 cells.forEach((cell) => {
 
     cell.addEventListener("mouseover", () => {
@@ -53,3 +55,11 @@ cells.forEach((cell) => {
       }
     });
 });
+
+// Black mode
+
+// cell.forEach((cell) => {
+//     cell.addEventListener("mouseover", () => {
+//         cell.classList.add("hover")
+//     })
+// }) 
