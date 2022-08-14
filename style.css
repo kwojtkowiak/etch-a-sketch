@@ -1,17 +1,24 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower");
 
 .cell {
-    border: 1px solid gray;
-    min-width: 20px;
-    min-height: 20px;
-    display: inline-block;
-    margin-right: 2px;
+  border: 1px solid gray;
+  min-width: 20px;
+  min-height: 20px;
+  display: inline-block;
+  margin-right: 2px;
 }
 
 .hover {
-    background-color: black;
+  background-color: black;
 }
 
-h1 {
-    font-family: 'Indie Flower', serif;
+header {
+  font-family: "Indie Flower", serif;
+  text-align: center;
+}
+
+main {
+  display: flex;
+  gap: 4rem;
+  justify-content: space-evenly;
 }
