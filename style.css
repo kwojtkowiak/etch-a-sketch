@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower");
+
 .cell {
     border: 1px solid gray;
     min-width: 20px;
@@ -8,4 +10,8 @@
 
 .hover {
     background-color: black;
+}
+
+h1 {
+    font-family: 'Indie Flower', serif;
 }
