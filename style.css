@@ -67,11 +67,19 @@ footer {
   background-color: var(--primary);
   font-size: 18px;
   color: black;
-  padding: 1rem;
+  padding: 2rem;
   width: 100%;
   gap: 10px;
 }
 
 i {
   color: var(--quartenary)
+}
+
+.slidercontainer {
+  width: 100%;
+}
+
+#area {
+  text-align: center;
 }

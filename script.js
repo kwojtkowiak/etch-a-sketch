@@ -3,6 +3,14 @@
 const container = document.getElementById("container");
 let rows = document.getElementsByClassName("gridRow");
 
+let slider = document.getElementById("myRange");
+let output = document.getElementById("area");
+output.innerHTML = slider.value;
+
+slider.oninput = function () {
+  output.innerHTML = `${this.value}x${this.value}`;
+};
+
 // Creates a default grid sized 16x16
 function defaultGrid() {
   makeRows(16);
@@ -35,26 +43,25 @@ let paint = false;
 
 //Set timeout func
 
-addEventListener('mousedown', (event) => {
-	paint = true;
+addEventListener("mousedown", (event) => {
+  paint = true;
 });
-addEventListener('mouseup', (event) => {
-	paint = false;
+addEventListener("mouseup", (event) => {
+  paint = false;
 });
 
 // Setting up a "hover element" for rainbow mode
 cells.forEach((cell) => {
-
-    cell.addEventListener("mouseover", () => {
-    	if (paint){
-       	const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-        cell.style.backgroundColor = "#" + randomColor;
-      }
-    });
-    cell.addEventListener("mousedown", () => {
-       	const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-        cell.style.backgroundColor = "#" + randomColor;
-    });
+  cell.addEventListener("mouseover", () => {
+    if (paint) {
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      cell.style.backgroundColor = "#" + randomColor;
+    }
+  });
+  cell.addEventListener("mousedown", () => {
+    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+    cell.style.backgroundColor = "#" + randomColor;
+  });
 });
 
 // Black mode
@@ -64,3 +71,6 @@ cells.forEach((cell) => {
 //         cell.classList.add("hover")
 //     })
 // })
+
+// Pop slider value func once, so it applies from the first website load
+slider.oninput();
