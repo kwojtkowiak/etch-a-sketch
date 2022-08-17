@@ -1,5 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower");
 
+:root {
+  --primary: #4fa3a5;
+  --seconday: #63c5ea;
+  --tertiary: #fa5396;
+  --quartenary: #fcb424;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  /* footer support */
+  position: relative;
+  min-height: 100%;
+}
+
+main {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
 .cell {
   border: 1px solid gray;
   min-width: 20px;
@@ -15,10 +40,38 @@
 header {
   font-family: "Indie Flower", serif;
   text-align: center;
+  font-size: 40px;
+  background-color: var(--primary);
 }
 
 main {
   display: flex;
   gap: 4rem;
   justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+#buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  font-family: "Montserrat Medium";
+  justify-content: center;
+  background-color: var(--primary);
+  font-size: 18px;
+  color: black;
+  padding: 1rem;
+  width: 100%;
+  gap: 10px;
+}
+
+i {
+  color: var(--quartenary)
 }

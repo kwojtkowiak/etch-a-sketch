@@ -6,6 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Etch-a-sketch></title>
     <link rel="stylesheet" type="text/css" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/c32f7bdd46.js"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <header>
@@ -13,13 +17,35 @@
     </header>
     <main>
       <div id="buttons">
+        <input id="colorWheel" type="color" value="#333333">
         <button class="buttonfunc" id="color">Pick a colour:</button>
         <button class="buttonfunc" id="rainbow">Rainbow mode</button>
         <button class="buttonfunc" id="black">Black mode</button>
         <button class="buttonfunc" id="eraser">Eraser</button>
+        <div class="slidecontainer">
+          <input
+            type="range"
+            min="1x1"
+            max="64x64"
+            value="16x16"
+            class="slider"
+            id="myRange"
+          />
+        </div>
       </div>
       <div id="container"></div>
     </main>
+    <footer>
+      <p>
+        Copyright K. Wojtkowiak for The Odin Project,
+        <script>
+          document.write(new Date().getFullYear());
+        </script>
+      </p>
+      <a href="https://github.com/kwojtkowiak" target="_blank">
+        <i class="fa-brands fa-square-github fa-bounce fa-xl"></i>
+      </a>
+    </footer>
     <script type="text/javascript" src="script.js"></script>
   </body>
 </html>
