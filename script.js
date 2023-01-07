@@ -74,3 +74,5 @@ cells.forEach((cell) => {
 
 // Pop slider value func once, so it applies from the first website load
 slider.oninput();
+
+//This is the current version
