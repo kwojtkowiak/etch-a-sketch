@@ -1,78 +1,111 @@
-// Sets important constants and variables
+const DEFAULT_COLOR = '#333333'
+const DEFAULT_MODE = 'color'
+const DEFAULT_SIZE = 16
 
-const container = document.getElementById("container");
-let rows = document.getElementsByClassName("gridRow");
+let currentColor = DEFAULT_COLOR
+let currentMode = DEFAULT_MODE
+let currentSize = DEFAULT_SIZE
 
-let slider = document.getElementById("myRange");
-let output = document.getElementById("area");
-output.innerHTML = slider.value;
-
-slider.oninput = function () {
-  output.innerHTML = `${this.value}x${this.value}`;
-};
-
-// Creates a default grid sized 16x16
-function defaultGrid() {
-  makeRows(16);
-  makeColumns(16);
+function setCurrentColor(newColor) {
+  currentColor = newColor
 }
 
-// Takes (rows, columns) input and makes a grid
-function makeRows(rowNum) {
-  // Creates rows
-  for (r = 0; r < rowNum; r++) {
-    let row = document.createElement("div");
-    container.appendChild(row).className = "gridRow";
+function setCurrentMode(newMode) {
+  activateButton(newMode)
+  currentMode = newMode
+}
+
+function setCurrentSize(newSize) {
+  currentSize = newSize
+}
+
+const colorPicker = document.getElementById('colorPicker')
+const colorBtn = document.getElementById('colorBtn')
+const rainbowBtn = document.getElementById('rainbowBtn')
+const eraserBtn = document.getElementById('eraserBtn')
+const clearBtn = document.getElementById('clearBtn')
+const sizeValue = document.getElementById('sizeValue')
+const sizeSlider = document.getElementById('sizeSlider')
+const grid = document.getElementById('grid')
+
+colorPicker.oninput = (e) => setCurrentColor(e.target.value)
+colorBtn.onclick = () => setCurrentMode('color')
+rainbowBtn.onclick = () => setCurrentMode('rainbow')
+eraserBtn.onclick = () => setCurrentMode('eraser')
+clearBtn.onclick = () => reloadGrid()
+clearBtn.onClick = () => clearBtn.classList.add('active')
+sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
+sizeSlider.onchange = (e) => changeSize(e.target.value)
+
+let mouseDown = false
+document.body.onmousedown = () => (mouseDown = true)
+document.body.onmouseup = () => (mouseDown = false)
+
+function changeSize(value) {
+  setCurrentSize(value)
+  updateSizeValue(value)
+  reloadGrid()
+}
+
+function updateSizeValue(value) {
+  sizeValue.innerHTML = `${value} x ${value}`
+}
+
+function reloadGrid() {
+  clearGrid()
+  setupGrid(currentSize)
+}
+
+function clearGrid() {
+  grid.innerHTML = ''
+}
+
+function setupGrid(size) {
+  grid.style.gridTemplateColumns = `repeat(${size}, 1fr)`
+  grid.style.gridTemplateRows = `repeat(${size}, 1fr)`
+
+  for (let i = 0; i < size * size; i++) {
+    const gridElement = document.createElement('div')
+    gridElement.classList.add('grid-element')
+    gridElement.addEventListener('mouseover', changeColor)
+    gridElement.addEventListener('mousedown', changeColor)
+    grid.appendChild(gridElement)
   }
 }
 
-// Creates columns
-function makeColumns(cellNum) {
-  for (i = 0; i < rows.length; i++) {
-    for (j = 0; j < cellNum; j++) {
-      let newCell = document.createElement("div");
-      rows[j].appendChild(newCell).className = "cell";
-    }
+function changeColor(e) {
+  if (e.type === 'mouseover' && !mouseDown) return
+  if (currentMode === 'rainbow') {
+    const randomR = Math.floor(Math.random() * 256)
+    const randomG = Math.floor(Math.random() * 256)
+    const randomB = Math.floor(Math.random() * 256)
+    e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`
+  } else if (currentMode === 'color') {
+    e.target.style.backgroundColor = currentColor
+  } else if (currentMode === 'eraser') {
+    e.target.style.backgroundColor = '#fefefe'
   }
 }
 
-defaultGrid();
+function activateButton(newMode) {
+  if (currentMode === 'rainbow') {
+    rainbowBtn.classList.remove('active')
+  } else if (currentMode === 'color') {
+    colorBtn.classList.remove('active')
+  } else if (currentMode === 'eraser') {
+    eraserBtn.classList.remove('active')
+  }
 
-let cells = document.querySelectorAll(".cell");
-let paint = false;
+  if (newMode === 'rainbow') {
+    rainbowBtn.classList.add('active')
+  } else if (newMode === 'color') {
+    colorBtn.classList.add('active')
+  } else if (newMode === 'eraser') {
+    eraserBtn.classList.add('active')
+  }
+}
 
-//Set timeout func
-
-addEventListener("mousedown", (event) => {
-  paint = true;
-});
-addEventListener("mouseup", (event) => {
-  paint = false;
-});
-
-// Setting up a "hover element" for rainbow mode
-cells.forEach((cell) => {
-  cell.addEventListener("mouseover", () => {
-    if (paint) {
-      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-      cell.style.backgroundColor = "#" + randomColor;
-    }
-  });
-  cell.addEventListener("mousedown", () => {
-    const randomColor = Math.floor(Math.random() * 16777215).toString(16);
-    cell.style.backgroundColor = "#" + randomColor;
-  });
-});
-
-// Black mode
-
-// cell.forEach((cell) => {
-//     cell.addEventListener("mouseover", () => {
-//         cell.classList.add("hover")
-//     })
-// })
-
-// Pop slider value func once, so it applies from the first website load
-slider.oninput();
-
-//This is the current version
+window.onload = () => {
+  setupGrid(DEFAULT_SIZE)
+  activateButton(DEFAULT_MODE)
+}
